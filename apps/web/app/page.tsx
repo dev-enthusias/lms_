@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { Card } from "@repo/ui/card";
-import { Gradient } from "@repo/ui/gradient";
-import { TurborepoLogo } from "@repo/ui/turborepo-logo";
+import { Card } from "@lms/ui/card";
+import { Gradient } from "@lms/ui/gradient";
+import { TurborepoLogo } from "@lms/ui/turborepo-logo";
+import { Button } from "@lms/ui/button";
 
 const LINKS = [
   {
@@ -111,6 +112,8 @@ export default function Page() {
           </Card>
         ))}
       </div>
+
+      <Button />
     </main>
   );
 }
