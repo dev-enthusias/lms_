@@ -8,5 +8,8 @@
     "allowJs": true,
     "jsx": "preserve",
     "noEmit": true
+  },
+  "paths": {
+    "@application/*": ["../application/*"]
   }
 }

@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @import "@lms/tailwind-config";
+
+@theme inline {
+  --font-inter: var(--font-inter);
+  --font-manrope: var(--font-manrope);
+}
