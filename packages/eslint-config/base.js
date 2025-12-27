@@ -3,6 +3,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import turboPlugin from "eslint-plugin-turbo";
 import tseslint from "typescript-eslint";
 import onlyWarn from "eslint-plugin-only-warn";
+import turboConfig from 'eslint-config-turbo/flat';
 
 /**
  * A shared ESLint configuration for the repository.
@@ -13,12 +14,13 @@ export const config = [
   js.configs.recommended,
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
+  ...turboConfig,
   {
     plugins: {
       turbo: turboPlugin,
     },
     rules: {
-      "turbo/no-undeclared-env-vars": "warn",
+      "turbo/no-undeclared-env-vars": ['error', {allowList: ['^ENV_[A-Z]+$']}],
     },
   },
   {
