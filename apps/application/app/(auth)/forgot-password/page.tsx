@@ -21,8 +21,7 @@ export default function ForgotPassword() {
               Forgot password
             </h1>
             <p className="lg:text-lg text-grey-400">
-              Enter the email address associated with your account to reset your
-              password
+              Enter your email address below to reset your password.
             </p>
           </div>
         </header>

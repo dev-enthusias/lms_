@@ -1,0 +1,18 @@
+{
+  "name": "@lms/utils",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./cn": "./cn.ts"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.5"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0"
+  }
+}

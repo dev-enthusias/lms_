@@ -26,6 +26,7 @@
   "devDependencies": {
     "@lms/eslint-config": "*",
     "@lms/tailwind-config": "*",
+    "@lms/utils": "*",
     "@lms/typescript-config": "*",
     "@tailwindcss/cli": "^4.1.5",
     "@types/react": "^19.1.0",
@@ -34,7 +35,9 @@
     "typescript": "5.9.2"
   },
   "dependencies": {
+    "@base-ui/react": "^1.0.0",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.562.0",
     "react-hook-form": "^7.69.0"
   }
 }

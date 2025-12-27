@@ -22,8 +22,7 @@ export default function ResetPassword() {
               Reset password
             </h1>
             <p className="lg:text-lg text-grey-400">
-              Enter the email address associated with your account to reset your
-              password
+              Please enter a new password to reset your account.
             </p>
           </div>
         </header>

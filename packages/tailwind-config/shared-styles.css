@@ -2,9 +2,28 @@
 
 @theme {
   --color-primary: #022651;
-  
+
   --color-grey-100: #d9d9d9;
   --color-grey-200: #9d9d9d;
   --color-grey-400: #3b3b3b;
+  --color-grey-300: #6e6e6e;
   --color-grey-500: #0a0a0a;
+}
+
+body {
+  position: relative;
+}
+
+.root {
+  isolation: isolate;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  main {
+    padding: 0 !important;
+  }
 }
