@@ -6,8 +6,11 @@ import { FormError } from "@lms/ui/form-error";
 import { useSubmit } from "../../hook/useSubmit";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ApplicationInputs, applicationSchema } from "../../lib/schema";
+import { GradeSelect } from "@lms/ui/select";
+import { useState } from "react";
 
 export function ApplicationForm() {
+  const [currentNumberOfSitting, setCurrentNumberOfSitting] = useState(1);
   const { register, submitForm, errors } = useSubmit<ApplicationInputs>(
     "/success",
     applicationSchema,
@@ -154,24 +157,36 @@ export function ApplicationForm() {
           </legend>
 
           <div className="grid grid-cols-2 gap-x-14 gap-y-7">
-            <Field
-              register={register}
-              errors={errors}
-              label="Examintion type"
-              name="email"
-            />
-            <Field
-              register={register}
-              errors={errors}
-              label="Examination number"
-              name="email"
-            />
-            <Field
-              register={register}
-              errors={errors}
-              label="Examination year"
-              name="email"
-            />
+            {Array.from({ length: currentNumberOfSitting}).map((_, index) => (
+              <>
+                <Field
+                  register={register}
+                  errors={errors}
+                  label={`Examination type (Sitting ${index + 1})`}
+                  name={`olevel.${index}.type` as any}
+                />
+                <Field
+                  register={register}
+                  errors={errors}
+                  label={`Examination number`}
+                  name={`olevel.${index}.number` as any}
+                />
+                <Field
+                  register={register}
+                  errors={errors}
+                  label={`Examination year`}
+                  name={`olevel.${index}.year` as any}
+                />
+              </>
+            ))}
+
+            <div className="col-span-2 flex gap-x-4">
+              {Array.from({ length: currentNumberOfSitting }).map(
+                (_, index) => (
+                  <OLevelGradeTable key={index} sittingIndex={index} />
+                )
+              )}
+            </div>
 
             <UploadButton label="Upload O'Level result" />
 
@@ -180,13 +195,16 @@ export function ApplicationForm() {
               <span className="italic text-sm">
                 (Mathematic, English, Physics, Chemistry, Biology)
               </span>{" "}
-              in not less than 2 sittings.
-              <button
-                className="text-primary underline ml-2 cursor-pointer hover:text-primary/80 duration-300 ease-in-out transition-colors"
-                onClick={() => setExamCount(examCount + 1)}
-              >
-                Add another exam
-              </button>
+              in not more than 2 sittings.
+              {currentNumberOfSitting < 2 && (
+                <button
+                  type="button"
+                  className="text-primary underline ml-2 cursor-pointer hover:text-primary/80 duration-300 ease-in-out transition-colors"
+                  onClick={() => setCurrentNumberOfSitting(2)}
+                >
+                  Add another exam
+                </button>
+              )}
             </p>
           </div>
         </fieldset>
@@ -258,9 +276,9 @@ function UploadButton({ label }: { label?: string }) {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         className="h-5 w-5"
       >
         <path d="M12 3v12" />
@@ -268,6 +286,58 @@ function UploadButton({ label }: { label?: string }) {
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
       </svg>{" "}
       {label ? label : "Upload file here"}
+    </div>
+  );
+}
+
+function OLevelGradeTable({ sittingIndex }: { sittingIndex: number }) {
+  // prettier-ignore
+  const predefinedSubjectRows = ['English', 'Mathematics', 'Physics', 'Chemistry', 'Biology']
+  const editableSubjectRows = Array.from({ length: 4 }, () => undefined);
+  const subjectRows = [...predefinedSubjectRows, ...editableSubjectRows];
+
+  console.log(subjectRows);
+
+  return (
+    <div className="grid grid-cols-3 flex-1 border border-grey-100">
+      <p className="col-span-3 text-sm font-medium text-primary text-center py-1 border-b border-grey-100">
+        Sitting {sittingIndex + 1}
+      </p>
+
+      {/* Subjects column */}
+      <div className="col-span-2">
+        <p className="font-medium font-inter text-grey-500 text-sm text-center py-1 border-b border-b-grey-100">
+          Subject
+        </p>
+        {subjectRows.map((row, index) => (
+          <div
+            key={`subject-${index}`}
+            className="border-b border-grey-100 last:border-0"
+          >
+            <input
+              type="text"
+              className="w-full py-1.5 focus:outline-none focus:border focus:border-primary px-2 text-[0.9375rem] text-grey-500 h-9"
+              placeholder="Enter a subject"
+              value={row && row}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Grades column */}
+      <div className="border-l border-l-grey-100">
+        <p className="font-medium font-inter text-grey-500  text-sm text-center py-1 border-b border-b-grey-100">
+          Grade
+        </p>
+        {subjectRows.map((row, index) => (
+          <div
+            key={`grade-${index}`}
+            className="border-b border-grey-100 last:border-0"
+          >
+            <GradeSelect />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
