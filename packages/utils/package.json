@@ -3,12 +3,21 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "exports": {
-    "./cn": "./cn.ts"
+    "./cn": {
+      "types": "./src/cn.ts",
+      "default": "./dist/cn.js"
+    }
   },
   "devDependencies": {
+    "@lms/typescript-config": "workspace:*",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.5"
+    "tailwindcss": "^4.1.5",
+    "typescript": "5.9.2"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

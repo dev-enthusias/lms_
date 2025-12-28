@@ -1,4 +1,4 @@
-import { cn } from "../../utils/cn";
+import { cn } from "@lms/utils/cn";
 
 export function Label({
   children,
