@@ -1,27 +1,33 @@
 {
-  "name": "@lms/utils",
-  "version": "0.0.0",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc"
-  },
-  "exports": {
-    "./cn": {
-      "types": "./src/cn.ts",
-      "default": "./dist/cn.js"
+    "name": "@lms/utils",
+    "version": "0.0.0",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "tsup --watch",
+        "build": "tsup",
+        "clean": "rm -rf dist"
+    },
+    "exports": {
+        "./cn": {
+            "types": "./dist/cn.d.ts",
+            "import": "./dist/cn.js",
+            "require": "./dist/cn.cjs"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^3.4.0",
+        "class-variance-authority": "^0.7.1"
+    },
+    "devDependencies": {
+        "tsup": "^8.5.1",
+        "postcss": "^8.5.3",
+        "typescript": "5.9.2",
+        "tailwindcss": "^4.1.5",
+        "@lms/typescript-config": "workspace:*"
     }
-  },
-  "devDependencies": {
-    "@lms/typescript-config": "workspace:*",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.5",
-    "typescript": "5.9.2"
-  },
-  "dependencies": {
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.4.0"
-  }
 }

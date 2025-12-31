@@ -1,0 +1,36 @@
+{
+    "name": "@lms/datetime-picker",
+    "version": "0.0.0",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "tsup --watch",
+        "build": "tsup",
+        "clean": "rm -rf dist"
+    },
+    "exports": {
+        "./*": {
+            "types": "./dist/*.d.ts",
+            "import": "./dist/*.js",
+            "require": "./dist/*.cjs"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "@base-ui/react": "^1.0.0",
+        "@lms/ui": "workspace:*",
+        "@lms/utils": "workspace:*",
+        "lucide-react": "^0.562.0"
+    },
+    "devDependencies": {
+        "@lms/typescript-config": "workspace:*",
+        "@types/react": "^19.1.0",
+        "tsup": "^8.5.1",
+        "typescript": "latest"
+    },
+    "peerDependencies": {
+        "react": "^19"
+    }
+}
