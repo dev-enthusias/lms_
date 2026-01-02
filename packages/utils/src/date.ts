@@ -73,7 +73,7 @@ export function getDayClass(state: DayState) {
 export function generateCalendarDays(
     year: number,
     month: number,
-    weekStartsOn
+    weekStartsOn: 0 | 1 = 0,
 ): CalendarDay[] {
     const days: CalendarDay[] = [];
     const today = new Date();

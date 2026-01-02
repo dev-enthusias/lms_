@@ -122,7 +122,6 @@
       "version": "0.0.0",
       "dependencies": {
         "@base-ui/react": "^1.0.0",
-        "@lms/datetime-picker": "workspace:*",
         "@lms/utils": "workspace:*",
         "clsx": "^2.1.1",
         "lucide-react": "^0.562.0",

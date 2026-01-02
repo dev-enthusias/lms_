@@ -325,16 +325,14 @@ import {
 } from "../../lib/schema";
 import { GradeSelect } from "@lms/ui/select";
 import React, { useState } from "react";
-import { FieldInput, FieldWrapper } from "@lms/ui/field";
-import { Fi } from "zod/v4/locales";
-import { FieldsetWrapper } from "@lms/ui/fieldset";
+import { RHFField } from "@lms/ui/rhf-field";
+import { Fieldset } from "@lms/ui/fieldset";
 import { DatePicker } from "@lms/ui/date-picker";
 
 // Define default values
 const defaultValues: Partial<ApplicationInputs> = {
     surname: "John",
     lastName: "Doe",
-    // gender: "male",
     olevelResults: [
         {
             type: "WAEC",
@@ -962,42 +960,35 @@ function FileUpload({ label, onFileSelect, accept }: FileUploadProps) {
 }
 
 function PersonalInformation({ control }: { control: any }) {
-    const [date, setDate] = useState<Date | null>(null);
-
     return (
-        <FieldsetWrapper title="Personal Information">
+        <Fieldset title="Personal Information">
             <div className="grid grid-cols-2 items-start gap-x-14 gap-y-7">
-                <FieldWrapper
+                <RHFField
                     name="surname"
                     label="Surname"
                     control={control}
                     placeholder="Enter your surname"
                 />
-                <FieldWrapper
+                <RHFField
                     name="middleName"
                     label="Middle name"
                     control={control}
                     placeholder="Enter your middle name"
                 />
-                <FieldWrapper
+                <RHFField
                     name="lastName"
                     label="Last name"
                     control={control}
                     placeholder="Enter your last name"
                 />
-                {/* <FieldWrapper
-          name="dateOfBirth"
-          label="Date of Birth"
-          control={control}
-          type="date"
-        /> */}
-                <DatePicker
-                    value={date}
-                    onChange={setDate}
-                    placeholder="Pick a date"
-                    weekStartsOn={1}
+                <RHFField
+                    name="birthDate"
+                    label="Birth Date"
+                    control={control}
+                    type="date"
+                    placeholder="Select your birth date"
                 />
-                <FieldWrapper
+                <RHFField
                     name="gender"
                     label="Gender"
                     control={control}
@@ -1014,6 +1005,6 @@ function PersonalInformation({ control }: { control: any }) {
                     complete as they will be used to verify your identity.
                 </p>
             </div>
-        </FieldsetWrapper>
+        </Fieldset>
     );
 }

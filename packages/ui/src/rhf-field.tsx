@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { cn } from "@lms/utils/cn";
+import { DatePicker } from "./date-picker";
 import { Field } from "@base-ui/react/field";
 import { Control, Controller, Path } from "react-hook-form";
 import { Combobox, NumberField, Select } from "@base-ui/react";
-import { Check, ChevronsUpDownIcon } from "lucide-react";
 
 interface BaseTextFieldProps<T extends Record<string, any>> {
     name: Path<T>;
@@ -48,14 +48,23 @@ interface ComboboxInputProps<
     items: { label: string; value: string }[];
 }
 
-type FieldWrapperProps<T extends Record<string, any>> =
+interface DateInputProps<
+    T extends Record<string, any>,
+> extends BaseTextFieldProps<T> {
+    type: "date";
+    isDateDisabled?: (date: Date) => boolean;
+    weekStartsOn?: 0 | 1;
+}
+
+type RHFFieldProps<T extends Record<string, any>> =
     | TextInputProps<T>
     | NumberInputProps<T>
     | SelectInputProps<T>
-    | ComboboxInputProps<T>;
+    | ComboboxInputProps<T>
+    | DateInputProps<T>;
 
-export function FieldWrapper<T extends Record<string, any>>(
-    props: FieldWrapperProps<T>,
+export function RHFField<T extends Record<string, any>>(
+    props: RHFFieldProps<T>,
 ) {
     const {
         name,
@@ -245,6 +254,24 @@ export function FieldWrapper<T extends Record<string, any>>(
                                 </Combobox.Positioner>
                             </Combobox.Portal>
                         </Combobox.Root>
+                    ) : type === "date" ? (
+                        <DatePicker
+                            value={value}
+                            onChange={(date) => {
+                                onChange(date);
+                                onBlur();
+                            }}
+                            placeholder={
+                                placeholder || `Select ${label.toLowerCase()}`
+                            }
+                            isDateDisabled={
+                                (props as DateInputProps<T>).isDateDisabled
+                            }
+                            weekStartsOn={
+                                (props as DateInputProps<T>).weekStartsOn
+                            }
+                            error={error}
+                        />
                     ) : null}
 
                     <Field.Error

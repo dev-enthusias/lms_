@@ -17,9 +17,16 @@ export function isSameDay(a: Date, b: Date): boolean {
     );
 }
 
-export function getWeekdays(weekStartsOn: 0 | 1 = 0) {
+export function getWeekdays(weekStartsOn: 0 | 1 = 0): string[] {
     const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    return weekStartsOn === 0 ? WEEKDAYS : [...WEEKDAYS.slice(1), WEEKDAYS[0]];
+
+    if (weekStartsOn === 1) {
+        // Move Sunday to the end
+        return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    }
+
+    // Default: Sunday first
+    return WEEKDAYS;
 }
 
 // Generate year options (last 100 years to next 10 years)
@@ -73,7 +80,7 @@ export function getDayClass(state: DayState) {
 export function generateCalendarDays(
     year: number,
     month: number,
-    weekStartsOn
+    weekStartsOn: 0 | 1,
 ): CalendarDay[] {
     const days: CalendarDay[] = [];
     const today = new Date();

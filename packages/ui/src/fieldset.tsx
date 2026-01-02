@@ -1,4 +1,4 @@
-export function FieldsetWrapper({
+export function Fieldset({
     title,
     children,
 }: {
